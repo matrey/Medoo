@@ -1250,7 +1250,7 @@ class Medoo
 		return $stack;
 	}
 
-	public function insert($table, $datas, $type = null)
+	public function insert($table, $datas, $command_type = null)
 	{
 		$stack = [];
 		$columns = [];
@@ -1332,7 +1332,7 @@ class Medoo
 			$fields[] = $this->columnQuote(preg_replace("/(\s*\[JSON\]$)/i", '', $key));
 		}
 
-		$command = ($type == 'INSERT IGNORE' || $type == 'REPLACE') ? $type : 'INSERT';
+		$command = ($command_type == 'INSERT IGNORE' || $command_type == 'REPLACE') ? $command_type : 'INSERT';
 		return $this->exec($command . ' INTO ' . $this->tableQuote($table) . ' (' . implode(', ', $fields) . ') VALUES ' . implode(', ', $stack), $map);
 	}
 
